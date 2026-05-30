@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://risk_dialogue_gameplay_smoke"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/smoke/risk_dialogue_gameplay_smoke_test.gd" id="1"]
+
+[node name="RiskDialogueGameplaySmokeTest" type="Node2D"]
+script = ExtResource("1")

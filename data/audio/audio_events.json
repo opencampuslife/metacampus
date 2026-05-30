@@ -1,0 +1,172 @@
+{
+  "events": {
+    "ui_click": {
+      "path": "res://assets/audio/sfx/ui/ui_click.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 0.98,
+      "pitch_max": 1.02
+    },
+    "ui_open_dialog": {
+      "path": "res://assets/audio/sfx/ui/ui_open_dialog.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "ui_close_dialog": {
+      "path": "res://assets/audio/sfx/ui/ui_close_dialog.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "dashboard_open": {
+      "path": "res://assets/audio/sfx/ui/dashboard_open.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "dashboard_close": {
+      "path": "res://assets/audio/sfx/ui/dashboard_close.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "quest_board_open": {
+      "path": "res://assets/audio/sfx/ui/quest_board_open.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "quest_board_close": {
+      "path": "res://assets/audio/sfx/ui/quest_board_close.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "quest_start": {
+      "path": "res://assets/audio/sfx/gameplay/quest_start.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "quest_complete": {
+      "path": "res://assets/audio/sfx/gameplay/quest_complete.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "quest_fail": {
+      "path": "res://assets/audio/sfx/gameplay/quest_fail.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 0.95,
+      "pitch_max": 1.0
+    },
+    "metric_up": {
+      "path": "res://assets/audio/sfx/gameplay/metric_up.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "metric_down": {
+      "path": "res://assets/audio/sfx/gameplay/metric_down.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 0.98,
+      "pitch_max": 1.02
+    },
+    "risk_warning": {
+      "path": "res://assets/audio/sfx/gameplay/risk_warning.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 0.95,
+      "pitch_max": 1.0
+    },
+    "critical_alert": {
+      "path": "res://assets/audio/sfx/gameplay/critical_alert.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "skill_level_up": {
+      "path": "res://assets/audio/sfx/gameplay/skill_level_up.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "upgrade_unlock": {
+      "path": "res://assets/audio/sfx/gameplay/upgrade_unlock.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "rag_search": {
+      "path": "res://assets/audio/sfx/ai/rag_search.wav",
+      "bus": "SFX",
+      "volume_db": -3.0,
+      "pitch_min": 0.98,
+      "pitch_max": 1.02
+    },
+    "ai_typing_loop": {
+      "path": "res://assets/audio/sfx/ai/ai_typing_loop.wav",
+      "bus": "SFX",
+      "volume_db": -3.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "canary_step": {
+      "path": "res://assets/audio/sfx/ai/canary_step.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "canary_rollback": {
+      "path": "res://assets/audio/sfx/ai/canary_rollback.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 0.95,
+      "pitch_max": 1.0
+    },
+    "interact_prompt": {
+      "path": "res://assets/audio/sfx/npc/interact_prompt.wav",
+      "bus": "SFX",
+      "volume_db": -1.0,
+      "pitch_min": 0.98,
+      "pitch_max": 1.02
+    },
+    "npc_footstep": {
+      "path": "res://assets/audio/sfx/npc/npc_footstep.wav",
+      "bus": "SFX",
+      "volume_db": -2.0,
+      "pitch_min": 0.97,
+      "pitch_max": 1.03
+    },
+    "settlement_open": {
+      "path": "res://assets/audio/sfx/gameplay/quest_complete.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    },
+    "settlement_continue": {
+      "path": "res://assets/audio/sfx/ui/ui_click.wav",
+      "bus": "SFX",
+      "volume_db": 0.0,
+      "pitch_min": 1.0,
+      "pitch_max": 1.0
+    }
+  }
+}

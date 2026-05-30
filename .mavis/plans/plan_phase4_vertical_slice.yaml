@@ -1,0 +1,343 @@
+version: 1
+plan:
+  name: 'Phase 4 — Playable Vertical Slice Hardening'
+  max_concurrency: 4
+  max_consecutive_failures: 3
+  max_cycles: 8
+  auto_accept: false
+  auto_reject_retries: 1
+  verifier_config:
+    default_verifiers: [verifier]
+    audit_sample_rate: 0
+    strict_mode: false
+
+tasks:
+  - id: track-a-7day-qa
+    title: 'Phase 4A — 7 天闭环 QA 验证'
+    prompt: >
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/ 项目中执行 7 天闭环 QA 验证。
+
+      读取 docs/phase4_vertical_slice_hardening_plan.md 的 Track 4A 部分，执行 A1-A8 全部检查项。
+
+      ## 执行命令摘要
+
+      A1. Headless Profile 验证：
+      ```bash
+      ./tools/switch_to_headless_smoke.sh && ./tools/verify_profile.sh
+      ~/Downloads/Godot.app/Contents/MacOS/Godot --headless --script gd_smoke_core.gd 2>&1 | tail -5
+      ```
+
+      A2. C# Runtime 恢复验证：
+      ```bash
+      ./tools/switch_to_csharp_runtime.sh && ./tools/verify_profile.sh
+      dotnet build --nologo 2>&1 | tail -3
+      ```
+
+      A3. Day 1-7 每日任务覆盖（Python 脚本检查）：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/quests/daily_quests.json') as f:
+          data = json.load(f)
+      by_day = {}
+      for q in data['quests']:
+          day = q.get('requirements', {}).get('day_min', 1)
+          by_day.setdefault(day, []).append(q['id'])
+      for d in range(1, 8):
+          count = len(by_day.get(d, []))
+          print(f'Day {d}: {count} quests [{\"OK\" if count > 0 else \"MISSING\"}]')
+      "
+      ```
+
+      A4. RiskScorer 高风险场景：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/dialogues/risk_dialogues.json') as f:
+          data = json.load(f)
+      for d in data.get('dialogues', data):
+          lvl = d.get('expected_risk_level', '?')
+          action = d.get('expected_recommended_action', '?')
+          print(f\"{d['id']}: {lvl}/{action}\")
+      "
+      ```
+
+      A5. CanarySimulator 就绪检查：
+      ```bash
+      ls scripts/gdscript/canary/canary_simulator_service.gd && ls scenes/canary/CanaryConsole.tscn && ls ../bin/libmetacampus_native.macos.template_debug.framework/ 2>/dev/null && echo "dylib OK"
+      ```
+
+      A6. SettlementReportPanel signal chain：
+      ```bash
+      grep -n "SettlementReportPanel\|daily_report" scenes/ scripts/gdscript/ -r 2>/dev/null | head -10
+      ```
+
+      A7. Dashboard signal chain：
+      ```bash
+      grep -n "all_metrics_updated\|choice_made" scripts/gdscript/ui/dashboard.gd 2>/dev/null | head -5
+      ```
+
+      A8. Evidence bundle：
+      ```bash
+      python3 -c "import json; d=json.load(open('reports/staging/percentage-canary-1pct-latest.json')); print('status:', d.get('status'))"
+      ```
+
+      ## 输出
+
+      生成 reports/qa/phase4_vertical_slice_report.md，包含 A1-A8 全部结果表格和遗留问题清单。
+      末尾加 ## VERDICT + VERDICT: [PASS|FAIL] + FAILED_CHECKS（如有）。
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: >
+      验证 Phase 4A QA 报告：
+      1. 读取 reports/qa/phase4_vertical_slice_report.md
+      2. 确认包含 A1-A8 全部 8 项检查结果
+      3. 重新运行部分检查命令验证结果正确性（尤其是 A1 headless smoke、A3 Day 覆盖）
+      4. 确认报告末尾有 VERDICT 字段
+      5. 如有 FAIL 项，列出具体的 FAILED_CHECKS
+
+    depends_on: []
+    gates: []
+    max_retries: 1
+    timeout_ms: 2700000
+
+  - id: track-b-balance
+    title: 'Phase 4B — 任务与风险平衡验证'
+    prompt: >
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/ 项目中执行任务与风险平衡验证。
+
+      读取 docs/phase4_vertical_slice_hardening_plan.md 的 Track 4B 部分，执行 B1-B4 全部检查项。
+
+      ## 执行命令摘要
+
+      B1. 奖励梯度检查：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/quests/daily_quests.json') as f:
+          data = json.load(f)
+      by_day = {}
+      for q in data['quests']:
+          day = q.get('requirements', {}).get('day_min', 1)
+          reward = q.get('rewards', {}).get('resources', {}).get('budget', 0)
+          by_day.setdefault(day, []).append(reward)
+      for d in sorted(by_day):
+          vals = by_day[d]
+          print(f'Day {d}: {len(vals)} quests, avg={sum(vals)/len(vals):.0f}, range=[{min(vals)},{max(vals)}]')
+      "
+      ```
+
+      B2. 风险惩罚检查：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/dialogues/risk_dialogues.json') as f:
+          data = json.load(f)
+      for d in data.get('dialogues', data):
+          lvl = d.get('expected_risk_level', '?')
+          if lvl in ('high', 'critical'):
+              print(f\"{d['id']}: {lvl} → compliance={d.get('expected_compliance_delta','?')}, trust={d.get('expected_parent_trust_delta','?')}\")
+      "
+      ```
+
+      B3. T8 Canary 惩罚验证：
+      ```bash
+      grep -A5 "full_release_without_testing\|full_release" data/dialogues/main_quests.json 2>/dev/null | head -20
+      python3 -c "
+      import json
+      with open('data/quests/main_quests.json') as f:
+          data = json.load(f)
+      for q in data['quests']:
+          if 'canary' in q.get('id','').lower() or 't8' in q.get('id','').lower():
+              print(f\"Quest: {q['id']}\")
+              print(f\"  fail_condition: {q.get('fail_condition', {})}\")
+              print(f\"  reward: {q.get('rewards', {})}\")
+      "
+      ```
+
+      B4. 指标阈值合理性：
+      ```bash
+      grep -n "school_efficiency\|parent_trust\|compliance_safety\|system_stability" data/metrics/metrics.json 2>/dev/null | head -10
+      grep -rn "1\.5\|block.*penalty\|revise.*penalty\|0\.5" scripts/gdscript/risk/ 2>/dev/null | head -5
+      ```
+
+      ## 输出
+
+      生成 reports/qa/phase4_balance_report.md，包含 B1-B4 全部结果和评估结论。
+      末尾加 ## VERDICT + VERDICT: [PASS|FAIL] + 具体问题描述（如有）。
+
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: >
+      验证 Phase 4B 平衡报告：
+      1. 读取 reports/qa/phase4_balance_report.md
+      2. 重新运行 B1 和 B2 的 Python 脚本，验证数值
+      3. 确认 critical 的 compliance_delta 绝对值 > high
+      4. 确认 Day 1-2 平均奖励 < Day 5-7 平均奖励（梯度合理）
+      5. 确认报告有 VERDICT 字段
+
+    depends_on: []
+    gates: []
+    max_retries: 1
+    timeout_ms: 1800000
+
+  - id: track-d-assets
+    title: 'Phase 4D — 资产与坐标校准'
+    prompt: >
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/ 项目中执行资产与坐标校准验证。
+
+      读取 docs/phase4_vertical_slice_hardening_plan.md 的 Track 4D 部分，执行 D1-D4 全部检查项。
+
+      ## 执行命令摘要
+
+      D1. NPC 坐标检查：
+      ```bash
+      cat data/locations.json 2>/dev/null | python3 -c "
+      import json, sys
+      try:
+          d = json.load(sys.stdin)
+          for loc in d.get('locations', d):
+              npcs = loc.get('npcs', [])
+              pos = loc.get('position', {})
+              print(f\"{loc.get('id','?')}: pos={pos}, npcs={npcs}\")
+      except Exception as e:
+          print('locations.json error:', e)
+      " 2>/dev/null || echo "locations.json not found"
+      ```
+
+      D2. 占位 sprite 检查：
+      ```bash
+      find assets/npcs -name "*.png" 2>/dev/null | while read f; do
+        size=$(identify "$f" 2>/dev/null | awk '{print $3}')
+        if [[ "$size" == "1x1" ]]; then echo "PLACEHOLDER: $f"; fi
+      done
+      echo "D2 check done"
+      ```
+
+      D3. Scene refs 不含 .cs（在 headless profile）：
+      ```bash
+      grep -h "ext_resource\|script_path\|type=\"GDScript\"" scenes/*.tscn 2>/dev/null | grep -i "\.cs" | head -5 || echo "No .cs refs in scenes"
+      ```
+
+      D4. animation_spec.json 完整性：
+      ```bash
+      python3 -c "
+      import json, os
+      npcs_dir = 'assets/npcs'
+      if not os.path.exists(npcs_dir):
+          print('assets/npcs/ not found')
+          exit()
+      for npc in sorted(os.listdir(npcs_dir)):
+          spec = f'{npcs_dir}/{npc}/animation_spec.json'
+          if os.path.exists(spec):
+              with open(spec) as f:
+                  d = json.load(f)
+              print(f'{npc}: {list(d.keys())}')
+          else:
+              print(f'{npc}: MISSING animation_spec.json')
+      "
+      ```
+
+      ## 输出
+
+      生成 reports/qa/phase4_assets_report.md，包含 D1-D4 全部结果。
+      末尾加 ## VERDICT + VERDICT: [PASS|FAIL] + 缺失项描述（如有）。
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: >
+      验证 Phase 4D 资产报告：
+      1. 读取 reports/qa/phase4_assets_report.md
+      2. 运行 D4 的 Python 脚本，验证 animation_spec.json 完整性
+      3. 确认无 1x1 placeholder sprite
+      4. 确认报告有 VERDICT 字段
+
+    depends_on: []
+    gates: []
+    max_retries: 1
+    timeout_ms: 1800000
+
+  - id: track-c-demo
+    title: 'Phase 4C — 演示路径文档化'
+    prompt: >
+      在 /Users/kevinzzz/Documents/database/gaokao-agent/game/metacampus-godot/ 项目中完成演示路径文档。
+
+      读取 docs/phase4_vertical_slice_hardening_plan.md 的 Track 4C 部分和 docs/demo-route.md。
+      依赖：Track 4A 和 4D 的报告。
+
+      ## 执行检查
+
+      C1. NPC 资产就绪：
+      ```bash
+      python3 -c "
+      import json, os
+      npcs = ['parent_representative', 'admissions_director', 'it_operator', 'logistics_manager']
+      missing = []
+      for npc in npcs:
+          path = f'assets/npcs/{npc}/'
+          if not os.path.exists(path):
+              missing.append(npc + '(dir missing)')
+              continue
+          files = os.listdir(path)
+          has_portrait = any('portrait' in f for f in files)
+          has_sprite = any('sprite' in f for f in files)
+          if not (has_portrait and has_sprite):
+              missing.append(f'{npc}(portrait={has_portrait},sprite={has_sprite})')
+      if missing: print('MISSING:', missing)
+      else: print('NPC assets: OK')
+      "
+      ```
+
+      C2. Dialogue 文件完整性：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/dialogues.json') as f:
+          data = json.load(f)
+      required = ['T1_admission_parent', 'T2_risk_parent_guarantee', 'T5_canteen_stats', 'T8_canary_release']
+      found = {d['id']: True for d in data.get('dialogues', [])}
+      for r in required:
+          status = 'OK' if r in found else 'MISSING'
+          print(f'{r}: {status}')
+      "
+      ```
+
+      C3. T2 高风险场景 action=block：
+      ```bash
+      python3 -c "
+      import json
+      with open('data/dialogues/risk_dialogues.json') as f:
+          data = json.load(f)
+      for d in data.get('dialogues', data):
+          lvl = d.get('expected_risk_level', '?')
+          action = d.get('expected_recommended_action', '?')
+          if lvl in ('high', 'critical'):
+              print(f\"{d['id']}: {lvl}/{action}\")
+      "
+      ```
+
+      C4. 写 demo script：
+      基于 docs/demo-route.md 和 C1-C3 检查结果，更新 docs/demo/vertical_slice_demo_script.md。
+      如果 vertical_slice_demo_script.md 不存在，直接创建。
+
+      ## 输出
+
+      1. 生成 reports/qa/phase4_demo_report.md（含 C1-C4 检查结果）
+      2. 写入/更新 docs/demo/vertical_slice_demo_script.md（10 分钟演示脚本）
+      两个文件末尾都加 ## VERDICT + VERDICT: [PASS|FAIL]
+
+    assigned_to: general
+    verified_by: verifier
+    verify_prompt: >
+      验证 Phase 4C 演示路径报告：
+      1. 读取 reports/qa/phase4_demo_report.md，确认 C1-C4 全部通过
+      2. 读取 docs/demo/vertical_slice_demo_script.md，确认包含完整演示路线
+      3. 运行 C1 和 C3 的检查命令验证 NPC 资产和 T2 场景
+      4. 确认两个文件都有 VERDICT 字段
+
+    depends_on: [track-a-7day-qa, track-d-assets]
+    gates: []
+    max_retries: 1
+    timeout_ms: 1800000
+

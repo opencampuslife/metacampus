@@ -1,0 +1,137 @@
+[gd_scene load_steps=2 format=3 uid="uid://risk_review_panel"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/ui/risk_review_panel.gd" id="1"]
+
+[node name="RiskReviewPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+<risk_review_panel_npc_trigger>
+## NPC Trigger: Allow RiskReviewPanel to be shown from NPC dialogue choices
+## Methods added: show_from_npc(question, choice_text, context)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.15, 0.9)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_constant_custom_padding_left = 20
+theme_constant_custom_padding_top = 20
+theme_constant_custom_padding_right = 20
+theme_constant_custom_padding_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_constant_separation = 12
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "风险评估"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="QuestionSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="MarginContainer/VBox/QuestionSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "问题: "
+text_wrap = true
+
+[node name="AnswerSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="AnswerLabel" type="Label" parent="MarginContainer/VBox/AnswerSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "回答: "
+text_wrap = true
+
+[node name="ScoreSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VBox/ScoreSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "风险分数: 0"
+theme_override_font_sizes/font_size = 20
+
+[node name="LevelSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBox/LevelSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "风险等级: low"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="RulesSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="RulesLabel" type="Label" parent="MarginContainer/VBox/RulesSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "触发规则: (无)"
+
+[node name="ActionSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="MarginContainer/VBox/ActionSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "推荐: allow"
+
+[node name="DeltasSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="DeltasLabel" type="Label" parent="MarginContainer/VBox/DeltasSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "指标影响: 合规=0, 信任=0, 稳定=0"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_constant_separation = 20
+
+[node name="SendButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "直接发送"
+
+[node name="ModifyButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "修改后发送"
+
+[node name="EscalateButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "转人工"
+
+[node name="BlockButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "阻止发送"
