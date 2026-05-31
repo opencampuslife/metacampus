@@ -10,3 +10,5 @@ license="MIT"
 [libraries]
 macos.debug="res://native/risk_scorer/bin/librisk_scorer.dylib"
 macos.release="res://native/risk_scorer/bin/librisk_scorer.dylib"
+windows.debug.x86_64="res://native/risk_scorer/bin/risk_scorer.dll"
+windows.release.x86_64="res://native/risk_scorer/bin/risk_scorer.dll"

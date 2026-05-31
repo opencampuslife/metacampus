@@ -1,0 +1,13 @@
+[configuration]
+compatibility_minimum="4.6"
+entry_symbol="canary_simulator_library_init"
+name="CanarySimulator"
+description="Canary release simulation for MetaCampus 2D deployment decisions"
+author="MetaCampus Team"
+license="MIT"
+
+[libraries]
+macos.debug="res://native/canary_simulator/bin/libcanary_simulator.macos.template_debug/libcanary_simulator.macos.template_debug"
+macos.release="res://native/canary_simulator/bin/libcanary_simulator.macos.template_release/libcanary_simulator.macos.template_release"
+windows.debug.x86_64="res://native/canary_simulator/bin/libcanary_simulator.windows.template_debug.x86_64.dll"
+windows.release.x86_64="res://native/canary_simulator/bin/libcanary_simulator.windows.template_release.x86_64.dll"

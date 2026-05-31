@@ -3,19 +3,13 @@
 import os
 import sys
 
-# Ensure we can find godot-cpp
 env = SConscript("godot-cpp/SConstruct")
 
-# Add our source directories to include paths
-env.Append(CPPPATH=["src/native/", "native/canary_simulator/src/"])
+env.Append(CPPPATH=["src/native/"])
 
-# Collect source files
-sources = Glob("src/native/*.cpp") + Glob("native/canary_simulator/src/*.cpp")
+sources = Glob("src/native/*.cpp")
 
-# Build shared library
-library_path = ""
 if env["platform"] == "macos":
-    # macOS uses a framework bundle for GDExtension
     libdir = "bin/libmetacampus_native.{}.{}.framework".format(env["platform"], env["target"])
     libname = "libmetacampus_native.{}.{}".format(env["platform"], env["target"])
     library = env.SharedLibrary(
@@ -24,7 +18,6 @@ if env["platform"] == "macos":
     )
     library_path = libdir
 
-    # Generate Info.plist for the framework bundle
     def generate_info_plist(target, source, env):
         plist_content = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -59,9 +52,16 @@ if env["platform"] == "macos":
     if not os.path.exists(resources_dir):
         os.makedirs(resources_dir)
     plist_path = os.path.join(resources_dir, "Info.plist")
-    # Always regenerate to match current target
     env.Command(plist_path, [], generate_info_plist)
     env.Depends(library, plist_path)
+
+elif env["platform"] == "windows":
+    library = env.SharedLibrary(
+        "bin/libmetacampus_native.windows.{}.x86_64{}".format(env["target"], env["SHLIBSUFFIX"]),
+        source=sources,
+    )
+    library_path = "bin/"
+
 else:
     library = env.SharedLibrary(
         "bin/libmetacampus_native{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
@@ -72,5 +72,4 @@ else:
 env.NoCache(library)
 Default(library)
 
-# Print build summary
 print("Build complete. Library in: " + library_path)

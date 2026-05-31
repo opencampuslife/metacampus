@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import os
+
+env = SConscript("../../godot-cpp/SConstruct")
+
+env.Append(CPPPATH=["src"])
+
+sources = [
+    "src/gdnative.cpp",
+    "src/register_types.cpp",
+    "src/canary_simulator.cpp",
+]
+
+libdir = "bin/libcanary_simulator.{}.{}".format(env["platform"], env["target"])
+libname = "libcanary_simulator.{}.{}".format(env["platform"], env["target"])
+
+if env["platform"] == "macos":
+    library = env.SharedLibrary(
+        os.path.join(libdir, libname),
+        source=sources,
+    )
+    import os
+    resources_dir = os.path.join(libdir, "Resources")
+    if not os.path.exists(resources_dir):
+        os.makedirs(resources_dir)
+else:
+    library = env.SharedLibrary(
+        "bin/libcanary_simulator{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        source=sources,
+    )
+
+env.NoCache(library)
+Default(library)

@@ -5,24 +5,45 @@
 [node name="DebugCommandPanel" type="CanvasLayer"]
 process_mode = 3
 layer = 200
+script = ExtResource("1_debug")
 
 [node name="DebugPanel" type="PanelContainer" parent="."]
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 60.0
-offset_right = 320.0
-offset_bottom = 700.0
+offset_right = 500.0
+offset_bottom = 600.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DebugPanel"]
+[node name="VBox" type="VBoxContainer" parent="DebugPanel"]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="DebugPanel/ScrollContainer"]
+[node name="TitleLabel" type="Label" parent="DebugPanel/VBox"]
 layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="DebugPanel/ScrollContainer/VBox"]
-text = "调试命令面板 (F12)"
+text = "调试命令面板 (F12/反引号)"
 theme_override_font_sizes/font_size = 18
 
-[node name="Separator" type="HSeparator" parent="DebugPanel/ScrollContainer/VBox"]
+[node name="Separator" type="HSeparator" parent="DebugPanel/VBox"]
+layout_mode = 2
 
-[connection signal="ready" from="." to="." method="_Ready"]
+[node name="Output" type="RichTextLabel" parent="DebugPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 200)
+bbcode_enabled = true
+scroll_active = true
+
+[node name="Input" type="LineEdit" parent="DebugPanel/VBox"]
+layout_mode = 2
+placeholder_text = "输入命令（help 查看帮助）"
+
+[node name="ButtonRow" type="HBoxContainer" parent="DebugPanel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="ExecuteButton" type="Button" parent="DebugPanel/VBox/ButtonRow"]
+layout_mode = 2
+text = "执行"
+
+[node name="CloseButton" type="Button" parent="DebugPanel/VBox/ButtonRow"]
+layout_mode = 2
+text = "关闭"
