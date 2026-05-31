@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="MetaCampus 2D"
 config/description="2D 校园运营模拟游戏 - 扮演校园 AI 管理员"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 [autoload]
@@ -30,6 +30,7 @@ NpcRegistry="*res://scripts/npc_registry.gd"
 MetricManager="*res://scripts/metric_manager.gd"
 AudioManager="*res://scripts/audio_manager.gd"
 QuestManager="*res://scripts/quest_manager.gd"
+SaveManager="*res://scripts/save_manager.gd"
 
 [display]
 

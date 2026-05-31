@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=3 format=3]
+
+[resource]
+[sub_resource type="SystemFont" id="1"]
+font_names = PackedStringArray("PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei")
+antialiasing = 1
+
+[sub_resource type="SystemFont" id="2"]
+font_names = PackedStringArray("PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei")
+antialiasing = 1
+bold = true
+
+[resource]
+default_font = SubResource("1")
+default_bold_font = SubResource("2")
