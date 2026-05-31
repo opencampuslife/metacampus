@@ -1,0 +1,205 @@
+[gd_scene load_steps=2 format=3 uid="uid://canary_console"]
+
+[ext_resource type="Script" path="res://scripts/gdscript/canary/canary_console.gd" id="1"]
+
+[node name="CanaryConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.08, 0.15, 0.92)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_constant_custom_padding_left = 30
+theme_constant_custom_padding_top = 30
+theme_constant_custom_padding_right = 30
+theme_constant_custom_padding_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_constant_separation = 14
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+text = "Canary 发布控制台"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0.4, 0.8, 1.0, 1.0)
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="StageSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="StageLabel" type="Label" parent="MarginContainer/VBox/StageSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "当前阶段: 0% → 1%"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1.0)
+
+[node name="ProgressSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBox/ProgressSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 100.0
+value = 0.0
+show_percentage = true
+
+[node name="MetricsGrid" type="GridContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+columns = 2
+theme_constant_h_separation = 20
+theme_constant_v_separation = 6
+
+[node name="StabilityKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "系统稳定性:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="StabilityValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "68.0"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1.0)
+
+[node name="ComplianceKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "合规安全:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="ComplianceValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "74.0"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1.0)
+
+[node name="TrustKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "家长信任:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="TrustValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "61.0"
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1.0)
+
+[node name="LatencyKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "延迟:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="LatencyValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "420 ms"
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1.0)
+
+[node name="ErrorRateKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "错误率:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="ErrorRateValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "0.018"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1.0)
+
+[node name="ComplaintKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "投诉率:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="ComplaintValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "0.004"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1.0)
+
+[node name="RiskKey" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "风险分数:"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="RiskValue" type="Label" parent="MarginContainer/VBox/MetricsGrid"]
+layout_mode = 2
+text = "35"
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1.0)
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="RecommendationSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="RecommendationLabel" type="Label" parent="MarginContainer/VBox/RecommendationSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "等待操作..."
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1.0)
+
+[node name="WarningsSection" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="WarningsLabel" type="Label" parent="MarginContainer/VBox/WarningsSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ""
+visible = false
+theme_override_colors/font_color = Color(1.0, 0.5, 0.2, 1.0)
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+theme_constant_separation = 12
+alignment = 1
+
+[node name="ProceedButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▶ 继续发布"
+theme_override_colors/font_color = Color(0.3, 0.9, 0.3, 1.0)
+
+[node name="PauseButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⏸ 暂停"
+disabled = true
+theme_override_colors/font_color = Color(0.9, 0.7, 0.1, 1.0)
+
+[node name="RollbackButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "↩ 回滚"
+disabled = true
+theme_override_colors/font_color = Color(1.0, 0.5, 0.2, 1.0)
+
+[node name="FullReleaseButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⚡ 全量发布"
+theme_override_colors/font_color = Color(1.0, 0.2, 0.2, 1.0)
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBox/ButtonRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "✕ 关闭"

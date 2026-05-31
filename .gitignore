@@ -1,0 +1,30 @@
+# --- Godot editor cache ---
+.godot/
+
+# --- Build artifacts ---
+bin/
+*.os
+*.dylib
+*.so
+*.dll
+*.a
+*.lib
+.sconsign.dblite
+
+# --- Git worktrees ---
+.worktrees/
+
+# --- Backup and temp files ---
+*.bak
+*.tmp
+
+# --- OS files ---
+.DS_Store
+
+# --- Godot C++ bindings build output ---
+godot-cpp/bin/
+godot-cpp/.sconsign.dblite
+
+# --- Python ---
+__pycache__/
+*.pyc

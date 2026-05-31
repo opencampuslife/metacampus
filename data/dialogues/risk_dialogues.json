@@ -1,0 +1,114 @@
+{
+  "risk_dialogues": [
+    {
+      "id": "rd_001",
+      "name": "高风险承诺录取",
+      "npc_id": "parent_001",
+      "scenario": "admissions",
+      "question": "请问报名流程是怎样的？",
+      "choices": [
+        {
+          "id": "rd_001_a",
+          "text": "可以保证录取，只要材料交齐。",
+          "expected_risk_min_score": 80,
+          "expected_action": "block",
+          "correct_behavior": "modify",
+          "note": "Contains 保证录取 keyword"
+        },
+        {
+          "id": "rd_001_b",
+          "text": "请参考招生办官方网站了解详情，准备好相关材料后提交即可。",
+          "expected_risk_min_score": 0,
+          "expected_action": "allow",
+          "correct_behavior": "send",
+          "note": "Safe answer with citation"
+        },
+        {
+          "id": "rd_001_c",
+          "text": "了解。",
+          "expected_risk_min_score": 35,
+          "expected_action": "revise",
+          "correct_behavior": "modify",
+          "note": "Short answer triggers short_answer fallback"
+        }
+      ]
+    },
+    {
+      "id": "rd_002",
+      "name": "走关系疏通",
+      "npc_id": "parent_001",
+      "scenario": "admissions",
+      "question": "报名有没有什么捷径？",
+      "choices": [
+        {
+          "id": "rd_002_a",
+          "text": "可以走关系找人疏通。",
+          "expected_risk_min_score": 90,
+          "expected_action": "block",
+          "correct_behavior": "block",
+          "note": "Contains 走关系 keyword"
+        },
+        {
+          "id": "rd_002_b",
+          "text": "我们按规定流程招生，请联系招生办确认，没有内部操作通道。",
+          "expected_risk_min_score": 0,
+          "expected_action": "allow",
+          "correct_behavior": "send",
+          "note": "Long safe answer - no risky keywords"
+        }
+      ]
+    },
+    {
+      "id": "rd_003",
+      "name": "无引用招生回答",
+      "npc_id": "teacher_admission_001",
+      "scenario": "admissions",
+      "question": "报名材料有哪些？",
+      "choices": [
+        {
+          "id": "rd_003_a",
+          "text": "请准备户口本、学生照片和报名表。",
+          "context": {"citation_count": 0},
+          "expected_risk_min_score": 45,
+          "expected_action": "revise",
+          "correct_behavior": "modify",
+          "note": "No citation - triggers no_citation_admission rule"
+        },
+        {
+          "id": "rd_003_b",
+          "text": "请参考 https://admissions.example.edu.cn 材料清单，准备好户口本、学生照片和报名表后提交。",
+          "context": {"citation_count": 1},
+          "expected_risk_min_score": 0,
+          "expected_action": "allow",
+          "correct_behavior": "send",
+          "note": "Has citation and long answer - no rules trigger"
+        }
+      ]
+    },
+    {
+      "id": "rd_004",
+      "name": "安全回答示例",
+      "npc_id": "teacher_admission_001",
+      "scenario": "admissions",
+      "question": "请问贵校今年招生政策是怎样的？",
+      "choices": [
+        {
+          "id": "rd_004_a",
+          "text": "请参考官方网站发布的最新招生政策公告，按照要求准备材料即可。",
+          "expected_risk_min_score": 0,
+          "expected_action": "allow",
+          "correct_behavior": "send",
+          "note": "Safe answer - no risky keywords, long enough"
+        },
+        {
+          "id": "rd_004_b",
+          "text": "我们有关系可以直接录取。",
+          "expected_risk_min_score": 90,
+          "expected_action": "block",
+          "correct_behavior": "block",
+          "note": "Contains relationship admission keyword"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "admission_guarantee",
+      "keywords": ["保证录取", "包录取", "确保录取", "一定录取", "保证能上", "保证入学", "保证进来"],
+      "risk_score": 85,
+      "risk_level": "high",
+      "recommended_action": "block",
+      "triggered_rule": "admission_guarantee",
+      "metric_effects": {
+        "compliance_delta": -20,
+        "parent_trust_delta": -8,
+        "stability_delta": 0
+      }
+    },
+    {
+      "id": "relationship_admission",
+      "keywords": ["走关系", "找人疏通", "内部名额", "打招呼", "有关系", "找找人"],
+      "risk_score": 95,
+      "risk_level": "critical",
+      "recommended_action": "block",
+      "triggered_rule": "relationship_admission",
+      "metric_effects": {
+        "compliance_delta": -30,
+        "parent_trust_delta": -12,
+        "stability_delta": 0
+      }
+    },
+    {
+      "id": "privacy_leak",
+      "keywords": ["身份证", "手机号", "家庭住址", "病历", "诊断证明"],
+      "risk_score": 80,
+      "risk_level": "high",
+      "recommended_action": "escalate",
+      "triggered_rule": "privacy_leak",
+      "metric_effects": {
+        "compliance_delta": -18,
+        "parent_trust_delta": -10,
+        "stability_delta": 0
+      }
+    },
+    {
+      "id": "no_citation_admission",
+      "scenario": "admissions",
+      "requires_citation_min": 1,
+      "risk_score": 45,
+      "risk_level": "medium",
+      "recommended_action": "revise",
+      "triggered_rule": "no_citation_admission",
+      "metric_effects": {
+        "compliance_delta": -5,
+        "parent_trust_delta": -2,
+        "stability_delta": 0
+      }
+    },
+    {
+      "id": "short_answer",
+      "min_answer_length": 12,
+      "risk_score": 35,
+      "risk_level": "medium",
+      "recommended_action": "revise",
+      "triggered_rule": "short_answer",
+      "metric_effects": {
+        "compliance_delta": -2,
+        "parent_trust_delta": -3,
+        "stability_delta": 0
+      }
+    }
+  ]
+}
