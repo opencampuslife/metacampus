@@ -7,13 +7,13 @@ class_name Player
 signal interact_pressed
 signal interact_released
 
-@export var speed: float = 200.0  # 移动速度
+@export var speed: float = 200.0
 
 var direction: Vector2 = Vector2.ZERO
 var is_interacting: bool = false
 
-# 节点引用
 @onready var body_rect: ColorRect = $BodyRect
+@onready var sprite: Sprite2D = $Sprite
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var interact_area: Area2D = $InteractArea
 @onready var camera: Camera2D = $Camera2D
@@ -23,9 +23,13 @@ var nearby_npc: Node2D = null
 var nearby_interactable: Node2D = null
 
 func _ready() -> void:
-	# 设置碰撞层
 	collision_layer = 1
 	collision_mask = 2
+
+	if sprite and sprite.texture:
+		body_rect.visible = false
+		sprite.visible = true
+		sprite.centered = true
 	
 	# 确保 Camera2D 正确设置
 	if camera:
@@ -72,12 +76,22 @@ func _process(_delta: float) -> void:
 		interact_released.emit()
 
 func _update_sprite_direction(dir: Vector2) -> void:
-	# ColorRect 不需要翻面，用颜色变化表示方向
-	if body_rect:
+	if body_rect and body_rect.visible:
 		if dir.x > 0:
-			body_rect.color = Color(0.14, 0.39, 0.92, 1)  # 蓝色-右
+			body_rect.color = Color(0.14, 0.39, 0.92, 1)
 		elif dir.x < 0:
-			body_rect.color = Color(0.92, 0.39, 0.14, 1)  # 橙色-左
+			body_rect.color = Color(0.92, 0.39, 0.14, 1)
+
+	if sprite and sprite.visible:
+		var target_flip = dir.x < 0
+		if abs(dir.x) > abs(dir.y):
+			sprite.flip_h = target_flip
+		if dir.y > 0:
+			sprite.position = Vector2(0, 4)
+		elif dir.y < 0:
+			sprite.position = Vector2(0, -4)
+		else:
+			sprite.position = Vector2(0, 0)
 
 func _on_interact_area_area_entered(area: Area2D) -> void:
 	# 检测进入交互区域的 NPC 或可交互物体（NPC 是 Area2D）

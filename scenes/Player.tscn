@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_player"]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/player/player_spritesheet.png" id="2_player_sprite"]
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 14.0
 
@@ -18,6 +19,13 @@ offset_top = -14
 offset_right = 14
 offset_bottom = 14
 color = Color(0.14, 0.39, 0.92, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_player_sprite")
+centered = true
+offset = Vector2(0, -8)
+scale = Vector2(1, 1)
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_player")

@@ -1,0 +1,25 @@
+[gd_resource type="TileSet" load_steps=9 format=3]
+
+[ext_resource type="Texture2D" uid="uid://tile_grass" path="res://assets/tiles/grass.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://tile_path" path="res://assets/tiles/path.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://tile_wall" path="res://assets/tiles/wall.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://tile_water" path="res://assets/tiles/water.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://tile_building" path="res://assets/tiles/building_roof.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://tile_tree" path="res://assets/tiles/tree.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://tile_flower" path="res://assets/tiles/flower.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://tile_fence" path="res://assets/tiles/fence.png" id="8"]
+
+[resource]
+
+tile_size = Vector2i(32, 32)
+next_source_id = 0
+
+[resource]
+sources/0 = SubResource("tile_source")
+
+[sub_resource type="TileSetAtlasSource" id="tile_source"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(32, 32)
+tiles/0/0 = 0
+tiles/0/0/terrain = 0
+tiles/0/0/navigation_polygon/0/0/polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)

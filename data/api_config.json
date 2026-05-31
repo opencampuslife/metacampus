@@ -16,6 +16,11 @@
     "一定能上",
     "百分百录取"
   ],
+  "image_gen": {
+    "api_url": "https://api.minimax.chat/v1/image_generation",
+    "model": "image-01",
+    "api_key_env": "MINIMAX_API_KEY"
+  },
   "cache": {
     "enabled": true,
     "max_entries": 100,
