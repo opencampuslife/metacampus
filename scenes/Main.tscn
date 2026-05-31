@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/QuestDetailPanel.tscn" id="12_questdetail"]
 [ext_resource type="PackedScene" path="res://scenes/DebugCommandPanel.tscn" id="13_debugpanel"]
 [ext_resource type="PackedScene" path="res://scenes/LocationCalibrationPanel.tscn" id="14_calib"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="15_main"]
+[ext_resource type="Script" path="res://scripts/main_controller.gd" id="15_main"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("15_main")

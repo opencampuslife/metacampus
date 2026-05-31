@@ -1,5 +1,4 @@
 extends Node
-class_name QuestManager
 
 ## Phase 2.8A — QuestManager GDScript Stub
 ## 等效替换 C# QuestManager.cs，功能覆盖：
@@ -84,6 +83,13 @@ func get_quest_status(qid: String) -> String:
 		QuestStatus.COMPLETED: return "completed"
 		QuestStatus.FAILED: return "failed"
 	return "locked"
+
+func refresh_daily_quests() -> void:
+	"""新的一天重新加载日常任务"""
+	_init_states()
+	_check_available()
+	daily_quests_refreshed.emit(_active)
+	print("[QuestManager] Daily quests refreshed for new day")
 
 func get_quests_for_npc(npc_id: String) -> Array:
 	var result = []

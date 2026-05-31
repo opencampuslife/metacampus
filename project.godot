@@ -35,6 +35,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SkillManager="*res://scripts/skill_manager.gd"
+RandomEventManager="*res://scripts/random_event_manager.gd"
+TimeManager="*res://scripts/time_manager.gd"
+ResourceManager="*res://scripts/resource_manager.gd"
+JsonLoader="*res://scripts/json_loader.gd"
+NpcRegistry="*res://scripts/npc_registry.gd"
+MetricManager="*res://scripts/metric_manager.gd"
 AudioManager="*res://scripts/audio_manager.gd"
 QuestManager="*res://scripts/quest_manager.gd"
 

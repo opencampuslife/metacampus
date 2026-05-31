@@ -45,7 +45,7 @@ func _load_dialogues() -> void:
 	if not json_loader:
 		push_warning("DialogueManager: JsonLoader not found in scene tree")
 		return
-	var data = json_loader.load_dialogues()
+	var data = json_loader.load_json("res://data/dialogues.json")
 	var dialogues = data.get("dialogues", [])
 	for dlg in dialogues:
 		var npc_id = dlg.get("npc_id", "")
