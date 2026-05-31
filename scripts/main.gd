@@ -12,8 +12,8 @@ func _smoke() -> void:
 	if not am or not qm:
 		print("[FAIL] Autoloads")
 		return
-	print("[PASS] AudioManager events=%d" % am.get("_events", {}).size())
-	print("[PASS] QuestManager quests=%d" % qm.get("_all_quests", {}).size())
+	print("[PASS] AudioManager events=%d" % am._events.size())
+	print("[PASS] QuestManager quests=%d" % qm._all_quests.size())
 	am.play_event("ui_click")
 	am.play_event("quest_start")
 	am.play_event("quest_complete")

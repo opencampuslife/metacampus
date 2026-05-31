@@ -7,8 +7,6 @@
 #include <godot_cpp/godot.hpp>
 
 #include "metacampus_native.h"
-#include "canary_simulator.h"
-
 using namespace godot;
 
 void initialize_metacampus_module(ModuleInitializationLevel p_level) {
@@ -17,7 +15,6 @@ void initialize_metacampus_module(ModuleInitializationLevel p_level) {
 	}
 
 	GDREGISTER_CLASS(MetaCampusNative);
-	GDREGISTER_CLASS(CanarySimulator);
 }
 
 void uninitialize_metacampus_module(ModuleInitializationLevel p_level) {

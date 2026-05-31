@@ -14,10 +14,13 @@
 [ext_resource type="PackedScene" path="res://scenes/QuestDetailPanel.tscn" id="12_questdetail"]
 [ext_resource type="PackedScene" path="res://scenes/DebugCommandPanel.tscn" id="13_debugpanel"]
 [ext_resource type="PackedScene" path="res://scenes/LocationCalibrationPanel.tscn" id="14_calib"]
-[ext_resource type="Script" path="res://scripts/main_controller.gd" id="15_main"]
+[ext_resource type="PackedScene" path="res://scenes/PauseMenu.tscn" id="15_pause"]
+[ext_resource type="PackedScene" path="res://scenes/SaveLoadPanel.tscn" id="16_saveload"]
+[ext_resource type="PackedScene" path="res://scenes/GameOverPanel.tscn" id="17_gameover"]
+[ext_resource type="Script" path="res://scripts/main_controller.gd" id="18_main"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("15_main")
+script = ExtResource("18_main")
 
 [node name="CampusMap" parent="." instance=ExtResource("1_map")]
 
@@ -80,3 +83,7 @@ DisplayName = "学生代表"
 [node name="DebugCommandPanel" parent="." instance=ExtResource("13_debugpanel")]
 
 [node name="LocationCalibrationPanel" parent="." instance=ExtResource("14_calib")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("15_pause")]
+[node name="SaveLoadPanel" parent="." instance=ExtResource("16_saveload")]
+[node name="GameOverPanel" parent="." instance=ExtResource("17_gameover")]

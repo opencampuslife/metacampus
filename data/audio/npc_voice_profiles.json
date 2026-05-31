@@ -1,0 +1,115 @@
+{
+  "voices": {
+    "admissions_director": {
+      "name": "招生办主任",
+      "base_path": "res://assets/audio/voices/admissions_director/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "male-qn-qingse",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "compliance_officer": {
+      "name": "合规部主任",
+      "base_path": "res://assets/audio/voices/compliance_officer/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "male-qn-qingse",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "homeroom_teacher": {
+      "name": "班主任",
+      "base_path": "res://assets/audio/voices/homeroom_teacher/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.05,
+      "voice_id": "Chinese (Mandarin)_Lyrical_Voice",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "logistics_manager": {
+      "name": "后勤主任",
+      "base_path": "res://assets/audio/voices/logistics_manager/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "male-qn-qingse",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "parent_representative": {
+      "name": "家长代表",
+      "base_path": "res://assets/audio/voices/parent_representative/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "Chinese (Mandarin)_Lyrical_Voice",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    }
+    },
+    "homeroom_teacher": {
+      "name": "班主任",
+      "base_path": "res://assets/audio/voices/homeroom_teacher/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.05,
+      "voice_id": "female-wenrou",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "it_operator": {
+      "name": "运维工程师",
+      "base_path": "res://assets/audio/voices/it_operator/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "male-qn-qingse",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "logistics_manager": {
+      "name": "后勤主任",
+      "base_path": "res://assets/audio/voices/logistics_manager/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "male-qn-jingpin",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "parent_representative": {
+      "name": "家长代表",
+      "base_path": "res://assets/audio/voices/parent_representative/",
+      "default_volume_db": -2.0,
+      "default_pitch": 1.0,
+      "voice_id": "female-wenrou",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "principal": {
+      "name": "校长",
+      "base_path": "res://assets/audio/voices/principal/",
+      "default_volume_db": -2.0,
+      "default_pitch": 0.95,
+      "voice_id": "male-qn-qingse",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    },
+    "student_representative": {
+      "name": "学生代表",
+      "base_path": "res://assets/audio/voices/student_representative/",
+      "default_volume_db": -1.0,
+      "default_pitch": 1.05,
+      "voice_id": "female-tianmei",
+      "clips": {
+        "greeting": "greeting.mp3"
+      }
+    }
+  }
+}
