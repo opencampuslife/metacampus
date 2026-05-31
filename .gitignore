@@ -20,6 +20,7 @@ bin/
 
 # --- OS files ---
 .DS_Store
+Thumbs.db
 
 # --- Godot C++ bindings build output ---
 godot-cpp/bin/
@@ -28,3 +29,22 @@ godot-cpp/.sconsign.dblite
 # --- Python ---
 __pycache__/
 *.pyc
+
+# --- IDE files ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Environment / Secrets ---
+.env
+.env.local
+.env.*.local
+*_key.txt
+*_key.json
+secret*
+credentials*
+
+# --- Build output ---
+builds/

@@ -96,7 +96,7 @@ func _show_loading_screen(scene_path: String) -> void:
 		if ls.has_method("start_load"):
 			ls.start_load(scene_path)
 
-func _load_save(save_name: String) -> void:
+func _unused_load_save(save_name: String) -> void:
 	var path = "user://saves/%s.json" % save_name
 	if not FileAccess.file_exists(path):
 		return

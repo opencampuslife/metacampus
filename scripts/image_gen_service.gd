@@ -1,14 +1,18 @@
 extends Node
 
 const API_URL_DEFAULT := "https://api.minimax.chat/v1/image_generation"
-const API_KEY := "MINIMAX_API_KEY_REMOVED"
+const API_KEY_ENV := "MINIMAX_API_KEY"
 
+var _api_key := ""
 var _api_url := API_URL_DEFAULT
 
 signal image_generated(url: String, local_path: String)
 signal generation_error(msg: String)
 
 func _ready() -> void:
+	_api_key = OS.get_environment(API_KEY_ENV)
+	if _api_key.is_empty():
+		push_warning("[ImageGenService] MINIMAX_API_KEY not set — image generation disabled")
 	var config = _load_config()
 	if config.has("api_url"):
 		_api_url = config.api_url
@@ -38,8 +42,12 @@ func generate_image(prompt: String, output_dir: String, filename: String = "") -
 	if not dir:
 		DirAccess.make_dir_recursive_absolute(output_dir)
 
+	if _api_key.is_empty():
+		generation_error.emit("MINIMAX_API_KEY not set")
+		return
+
 	var headers = [
-		"Authorization: Bearer " + API_KEY,
+		"Authorization: Bearer " + _api_key,
 		"Content-Type: application/json",
 	]
 

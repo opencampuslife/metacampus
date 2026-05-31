@@ -8,9 +8,13 @@ import time
 import urllib.request
 import urllib.error
 
-API_URL = "https://api.minimax.chat/v1/image_generation"
-API_KEY = "MINIMAX_API_KEY_REMOVED"
+API_URL = os.environ.get("MINIMAX_API_URL", "https://api.minimax.chat/v1/image_generation")
+API_KEY = os.environ.get("MINIMAX_API_KEY", "")
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+if not API_KEY:
+    print("ERROR: MINIMAX_API_KEY environment variable not set")
+    sys.exit(1)
 
 
 def generate_image(prompt: str, output_path: str, retries: int = 3) -> bool:
